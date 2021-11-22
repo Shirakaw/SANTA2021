@@ -1,15 +1,14 @@
-import numpy as np 
-import time
-import pandas as pd
-import xlrd
-# step1 由permutation中可知一共5040组排序方式
-data_file = pd.read_csv(r'C:\Users\12499\OneDrive\santa-2021\distance_matrix.csv') # Excel文件存储位置
-data_file.drop(columns=["Permutation"])
-data_file.drop([1])
+def CSVLine2Matrix(csv_file_name: str):
+    matrix_list = []
+    with open(csv_file_name, encoding="UTF-8") as fp:
+        line = fp.readline()
+        while line:
+            line = fp.readline()
+            if line:
+                # ['\uf8ffüéÖ\uf8ffü§∂\uf8ffü¶å\uf8ffüéÄ', '7', '7', '7'] 保留序列1及之后的数组
+                matrix_list.append(line.split(',')[1:])
+    return matrix_list
 
 
-def distance(p, q):
-  n = len(p)
-  for i in range(n + 1):
-    if p[i:] == q[:n - i]:
-      return n
+distance_matrox = CSVLine2Matrix('distance_matrix.csv')
+print(distance_matrox)
